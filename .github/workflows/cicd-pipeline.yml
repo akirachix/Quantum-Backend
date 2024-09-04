@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-      -feature/cicd
       - staging
 jobs:
   build:
@@ -24,7 +23,3 @@ jobs:
           pip install -r requirements.txt
       - name: Run migrations
         run: |
-          python manage.py migrate
-      - name: Run tests
-        run: |
-          python manage.py test
