@@ -174,12 +174,3 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-
-AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
-AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
-AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
-
-REDIRECT_URI= "http://127.0.0.1:8000/auth/callback/"
-
-
-REDIRECT_URI= " http://127.0.0.1:8000/auth/ "
