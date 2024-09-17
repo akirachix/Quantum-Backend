@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'farmer',
+    'api',
+    'rest_framework',
+    'sendsms',
+    
 ]
 
 MIDDLEWARE = [
@@ -73,10 +78,15 @@ WSGI_APPLICATION = 'rutuba_farm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "mydatabase",
+        "USER": "myuser",
+        "PASSWORD": "mypassword",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -121,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+"""SMSLEOPARD credentials"""
+SMS_LEOPARD_API_URL = 'https://api.smsleopard.com/v1/sms/send'
+SMS_LEOPARD_ACCESS_TOKEN = 'alA4aXRHVHc2OG9QUGF2a0dxYVc6M01pSldhYUhDMlF2eVdnNHdYZnpNUjMzQzZZeFNNTVUyQmN4aEhuYg=='
