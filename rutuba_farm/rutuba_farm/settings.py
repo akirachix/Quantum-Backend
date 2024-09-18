@@ -185,9 +185,6 @@ AUTH_USER_MODEL = 'users.User'
 
 
 
-ENV_FILE = find_dotenv()
-if ENV_FILE:
-    load_dotenv(ENV_FILE)
 
 # DATABASES = {
 #     'default': {
