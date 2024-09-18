@@ -25,6 +25,14 @@ from api.serializers import UsersSerializer
 from users.models import User
 from .serializers import UsersSerializer
 from django.contrib.auth import authenticate
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+from recommendations.models import Recommendation
+from phreadings.models import PhReading
+from inactivestatus.models import Sensor
+from .serializers import RecommendationSerializer, PhReadingSerializer, SensorSerializer
 import logging
 
 
@@ -53,8 +61,6 @@ class SensorreadingsListView(APIView):
         return Response(serializer.data)
     def post(self, request):
         serializer = SensorreadingsSerializer(data=request.data)
-
-
 
 
 logger = logging.getLogger(__name__) 
@@ -102,7 +108,6 @@ class LoginView(APIView):
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-
 class UsersListView(APIView):
     
     def get(self, request):
@@ -138,7 +143,6 @@ class UsersDetailView(APIView):
         sensor_reading.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-
 class MoisturereadingsListView(APIView):
     def get(self, request):
         moisture_readings = request.query_params.get("moisture_readings")
@@ -185,6 +189,50 @@ def generate_token(request):
         'access': str(refresh.access_token),
         'refresh': str(refresh)
     })
+
+class RecommendationListView(APIView):
+    def get(self, request, recommendation_id):
+        recommendation = get_object_or_404(Recommendation, id=recommendation_id)
+        serializer = RecommendationSerializer(recommendation)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = RecommendationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class InactiveSensorsListView(APIView):
+    def get(self, request):
+        inactive_sensors = Sensor.objects.filter(is_active=False)
+        serializer = SensorSerializer(inactive_sensors, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        data['is_active'] = False  
+        serializer = SensorSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PhReadingsListView(APIView):
+    def get(self, request):
+        ph_readings = PhReading.objects.all()
+        serializer = PhReadingSerializer(ph_readings, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PhReadingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
