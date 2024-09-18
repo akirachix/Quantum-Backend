@@ -21,3 +21,5 @@ database_config.py
 # Compiled Python files
 __pycache__/
 *.pyc
+
+env

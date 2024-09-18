@@ -19,6 +19,19 @@ from dotenv import load_dotenv, find_dotenv
 import logging.config
 from datetime import timedelta
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Auth0 configuration
+AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
+AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+
+# Redirect URI
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, "Quantum", "templates")
@@ -46,9 +59,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
     'rest_framework',
+    'moisturereadings',
+    'sensorreadings',
     'authentication',
+    'users',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -166,7 +181,6 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
-
 
 
 
