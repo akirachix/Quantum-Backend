@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
-class PhreadingsConfig(AppConfig):
+class InactivestatusConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'phreadings'
+    name = 'inactivestatus'
