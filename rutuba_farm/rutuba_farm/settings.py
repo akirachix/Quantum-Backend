@@ -184,15 +184,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'quantumdatabase',
-#         'USER':'quantumteam',
-#         'PASSWORD':'quantum123',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
