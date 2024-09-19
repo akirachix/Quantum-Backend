@@ -105,21 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rutuba_farm.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "mydatabase",
-#         "USER": "myuser",
-#         "PASSWORD": "mypassword",
-#         "HOST": "localhost",
-#         "PORT": "5432",
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -203,8 +188,4 @@ TEMPLATES = [
 AUTH_USER_MODEL = 'users.User'
 
 
-
-# ENV_FILE = find_dotenv()
-# if ENV_FILE:
-#     load_dotenv(ENV_FILE)
 

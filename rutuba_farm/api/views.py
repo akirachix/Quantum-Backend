@@ -168,20 +168,10 @@ def send_sms_view(request):
 
     try:
         farmer = get_object_or_404(Farmer,phone_number=phone_number)
-
-        message = f"Hello {farmer.farmers_name}, here are your recommendations: [YOUR_RECOMMENDATIONS_HERE]"
-
+        message = f"Hello{farmer.farmers_name},your pH level is 4,moisture level is 40% and your soil has low nitrogen.Based on these results,here are your recommendations:Water your crops,add lime and apply nitrogenous fertilizer eg.Amonium Nitrate"
         response = send_sms(phone_number, message) 
 
         if response:
-            # Save to database
-            Sendsms.objects.create(
-                sender_id=random.randint(1000, 9999),  
-                recipient=phone_number,
-                farmer_id=farmer.farmer_id,
-                sensor_id=0,
-                message=message
-            )
             return Response({"status": "SMS sent successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Failed to send SMS"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
