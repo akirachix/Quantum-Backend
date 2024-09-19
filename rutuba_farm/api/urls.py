@@ -10,6 +10,7 @@ from .views import generate_token
 from .views import UsersListView
 from .views import UsersDetailView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from .views import RecommendationListView, InactiveSensorsListView, PhReadingsListView
 
 
 
@@ -24,5 +25,10 @@ urlpatterns = [
     path('generate_token/', views.generate_token, name='generate_token'),
     path('users/', views.UsersListView.as_view(), name='users-list'),
     path('register/', views.RegisterView.as_view(), name='register_view'),
+    path('recommendation/', RecommendationListView.as_view(), name='recommendation-list'),
+    path('inactive/', InactiveSensorsListView.as_view(), name='get_inactive_sensors'),
+    path('ph-readings/', PhReadingsListView.as_view(), name='list_ph_readings'),
+
+    
 ]
 
