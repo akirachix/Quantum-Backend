@@ -2,6 +2,9 @@ from rest_framework import serializers
 from sensorreadings.models import Sensorreadings
 from moisturereadings.models import Moisturereadings
 from users.models import User
+from recommendations.models import Recommendation
+from phreadings.models import PhReading
+from inactivestatus.models import Sensor
 
 
 class SensorreadingsSerializer(serializers.ModelSerializer):
@@ -86,3 +89,18 @@ class MoisturereadingsSerializer(serializers.ModelSerializer):
     class Meta:
         model= Moisturereadings
         fields="__all__"
+        
+class RecommendationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recommendation
+        fields = '__all__'
+
+class PhReadingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhReading
+        fields = '__all__'
+
+class SensorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sensor
+        fields = '__all__'
