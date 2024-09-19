@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SensorreadingsListView
+from .views import RecommendationDetailedView, SensorreadingsListView
 from .views import SensorreadingsDetailView
 from .views import MoisturereadingsListView
 from .views import MoisturereadingsDetailView
@@ -25,7 +25,7 @@ urlpatterns = [
     path('generate_token/', views.generate_token, name='generate_token'),
     path('users/', views.UsersListView.as_view(), name='users-list'),
     path('register/', views.RegisterView.as_view(), name='register_view'),
-    path('recommendation/', RecommendationListView.as_view(), name='recommendation-detail'),
+    path('recommendation/', RecommendationDetailedView.as_view(), name='recommendation-detail'),
     path('inactive/', InactiveSensorsListView.as_view(), name='inactive_sensors'),
     path('ph-readings/', PhReadingsListView.as_view(), name='list_ph_readings'),
 
