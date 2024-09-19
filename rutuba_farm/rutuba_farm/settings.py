@@ -19,8 +19,6 @@ from dotenv import load_dotenv, find_dotenv
 import logging.config
 from datetime import timedelta
 
-import os
-from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
