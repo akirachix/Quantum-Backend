@@ -26,7 +26,7 @@ urlpatterns = [
     path('users/', views.UsersListView.as_view(), name='users-list'),
     path('register/', views.RegisterView.as_view(), name='register_view'),
     path('recommendation/', RecommendationListView.as_view(), name='recommendation-list'),
-    path('inactive/', InactiveSensorsListView.as_view(), name='get_inactive_sensors'),
+    path('inactive/', InactiveSensorsListView.as_view(), name='inactive_sensors'),
     path('ph-readings/', PhReadingsListView.as_view(), name='list_ph_readings'),
 
     

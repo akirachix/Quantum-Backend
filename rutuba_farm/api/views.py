@@ -175,7 +175,7 @@ def generate_token(request):
         'refresh': str(refresh)
     })
 
-class RecommendationListView(APIView):
+class RecommendationDetailedView(APIView):
     def get(self, request, recommendation_id):
         recommendation = get_object_or_404(Recommendation, id=recommendation_id)
         serializer = RecommendationSerializer(recommendation)
