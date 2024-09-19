@@ -10,7 +10,7 @@ from .views import generate_token
 from .views import UsersListView
 from .views import UsersDetailView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-from .views import RecommendationListView, InactiveSensorsListView, PhReadingsListView
+from .views import RecommendationDetailedView, InactiveSensorsListView, PhReadingsListView
 
 
 
