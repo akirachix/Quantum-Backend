@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'sensorreadings',
     'authentication',
     'users',
+    'recommendation',
+    'npkreadings',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
