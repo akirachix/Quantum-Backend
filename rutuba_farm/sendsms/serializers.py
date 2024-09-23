@@ -1,9 +1,14 @@
-# sendsms/serializers.py
 
 from rest_framework import serializers
-from .models import Sendsms
+from .models import SensorData
+from .utils import send_sms
+import logging
 
-class SendsmsSerializer(serializers.ModelSerializer):
+logger = logging.getLogger(__name__)
+
+class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Sendsms
-        fields = ['sender_id', 'recipient', 'farmer_id', 'sensor_id', 'message']
+        model = SensorData
+        fields = ['ph_reading', 'moisture_reading', 'nutrients', 'farmer_id']
+       
+

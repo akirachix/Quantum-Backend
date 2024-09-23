@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'farmer',
-    'api',
     'rest_framework',
     'sendsms',
     'phreadings',
@@ -68,6 +67,7 @@ INSTALLED_APPS = [
     'sensorreadings',
     'authentication',
     'users',
+    # 'django_crontab',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -115,6 +115,7 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
     ],
 }
 SIMPLE_JWT = {
@@ -169,6 +170,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 """SMSLEOPARD credentials"""
 SMS_LEOPARD_API_URL = 'https://api.smsleopard.com/v1/sms/send'
 SMS_LEOPARD_ACCESS_TOKEN = 'alA4aXRHVHc2OG9QUGF2a0dxYVc6M01pSldhYUhDMlF2eVdnNHdYZnpNUjMzQzZZeFNNTVUyQmN4aEhuYg=='
+
+# SMS_LEOPARD_ACCESS_TOKEN='jP8itGTw68oPPavkGqaW'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -187,5 +190,12 @@ TEMPLATES = [
 
 AUTH_USER_MODEL = 'users.User'
 
+# CRON_CLASSES = [
+#     'sendsms.soil_sensor_cron.SendWeeklySoilSensorSMS',
+# ]
+
+# CRONJOBS = [
+#     ('0 0 * * 0', 'your_app.tasks.send_weekly_message'),  # Runs at midnight (00:00) every Sunday
+# ]
 
 

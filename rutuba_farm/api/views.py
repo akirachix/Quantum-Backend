@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import FarmerSerializer
 from farmer.models import Farmer
-from sendsms.models import Sendsms
+# from sendsms.models import Sendsms
 from sendsms.utils import send_sms
 from sensorreadings.models import Sensorreadings
 from .serializers import SensorreadingsSerializer
@@ -30,8 +30,9 @@ from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from .serializers import RecommendationSerializer, PhReadingSerializer, SensorSerializer
 import logging
-
 import random
+
+
 
 # Farmer Views
 
@@ -45,8 +46,16 @@ class FarmerListView(APIView):
         serializer = FarmerSerializer(farmers, many=True)
         return Response(serializer.data)
 
+    # def post(self, request):
+    #     serializer = FarmerSerializer(data=request.data)
+
     def post(self, request):
         serializer = FarmerSerializer(data=request.data)
+        if serializer.is_valid():
+            farmer = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # Create your views here.
@@ -138,6 +147,15 @@ class FarmerDetailView(APIView):
     def put(self, request, id):
         farmer = get_object_or_404(Farmer, id=id)
         serializer = FarmerSerializer(farmer, data=request.data)
+    
+    def post(self, request):
+        serializer = FarmerSerializer(data=request.data)
+        if serializer.is_valid():
+            farmer = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        
 
 class UsersDetailView(APIView):
     def get(self, request, id):

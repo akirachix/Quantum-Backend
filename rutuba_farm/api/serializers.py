@@ -6,7 +6,6 @@ from recommendations.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from farmer.models import Farmer
-from sendsms.models import Sendsms
 
 
 class FarmerSerializer(serializers.ModelSerializer):
@@ -14,12 +13,6 @@ class FarmerSerializer(serializers.ModelSerializer):
         model= Farmer
         fields="__all__"
 
-
-
-class SendsmsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model= Sendsms
-        fields="__all__"
 
 
 
@@ -45,11 +38,11 @@ class UsersSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password')
-
         user = User(**validated_data)
         user.set_password(password)  
         user.save()
         return user
+    
 
 class UsersDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,7 +55,6 @@ class UsersDetailSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):   
-
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -88,18 +80,24 @@ class MoisturereadingsSerializer(serializers.ModelSerializer):
     class Meta:
         model= Moisturereadings
         fields="__all__"
+
         
 class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = '__all__'
 
+
 class PhReadingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhReading
         fields = '__all__'
 
+
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         fields = '__all__'
+
+
+

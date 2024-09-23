@@ -14,9 +14,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import RecommendationDetailedView, InactiveSensorsListView, PhReadingsListView
 
 
+
 urlpatterns = [
     path('sensorreadings/',SensorreadingsListView.as_view(),name='sensorreadings_list_view'),
-    path('sensorreadings/<int:id>',SensorreadingsDetailView.as_view(),name='sensorreadings_list_view'),
+    path('sensorreadings/<int:id>/',SensorreadingsDetailView.as_view(),name='sensorreadings_list_view'),
     path('moisturereadings/', MoisturereadingsListView.as_view(),name='moisturereadings_list_view'),
     path('moisturereadings/<int:id>/',MoisturereadingsDetailView.as_view(),name='moisturereadings_detail_view'),
     path('users/<int:id>/', UsersDetailView.as_view(), name='users_detail_view'),
@@ -30,7 +31,7 @@ urlpatterns = [
     path('send_recommendation/<int:farmer_id>/', views.send_recommendation, name='send_recommendation'),
     path('farmer/<int:farmer_id>/', views.farmer_detail, name='farmer_detail'),
     path('farmers/', FarmerListView.as_view(), name='farmer-list'),
-
-    
+   
+  
 ]
 
