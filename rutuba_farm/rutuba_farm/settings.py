@@ -67,7 +67,8 @@ INSTALLED_APPS = [
     'sensorreadings',
     'authentication',
     'users',
-    # 'django_crontab',
+    'recommendation',
+    'npkreadings',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

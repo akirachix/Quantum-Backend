@@ -2,7 +2,7 @@ from rest_framework import serializers
 from sensorreadings.models import Sensorreadings
 from moisturereadings.models import Moisturereadings
 from users.models import User
-from recommendations.models import Recommendation
+from recommendation.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from farmer.models import Farmer
@@ -13,7 +13,8 @@ class FarmerSerializer(serializers.ModelSerializer):
         model= Farmer
         fields="__all__"
 
-
+from npkreadings.models import NpkReading
+from recommendations.models import Recommendations
 
 
 class SensorreadingsSerializer(serializers.ModelSerializer):
@@ -99,5 +100,14 @@ class SensorSerializer(serializers.ModelSerializer):
         model = Sensor
         fields = '__all__'
 
+        
+class NpkReadingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=NpkReading
+        fields="__all__"
 
 
+class RecommendationsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recommendations
+        fields = "__all__"

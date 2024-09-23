@@ -26,9 +26,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from recommendations.models import Recommendation
+from django.shortcuts import get_object_or_404
+from recommendations.models import Recommendations
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
-from .serializers import RecommendationSerializer, PhReadingSerializer, SensorSerializer
+from .serializers import RecommendationsSerializer, PhReadingSerializer, SensorSerializer
 import logging
 import random
 
@@ -57,6 +59,10 @@ class FarmerListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+from npkreadings.models import NpkReading
+from .serializers import NpkReadingSerializer
+from recommendation.models import Recommendation
+from .serializers import RecommendationSerializer
 
 # Create your views here.
 class SensorreadingsListView(APIView):
@@ -282,18 +288,6 @@ def generate_token(request):
         'refresh': str(refresh)
     })
 
-class RecommendationDetailedView(APIView):
-    def get(self, request, recommendation_id):
-        recommendation = get_object_or_404(Recommendation, id=recommendation_id)
-        serializer = RecommendationSerializer(recommendation)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = RecommendationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class InactiveSensorsListView(APIView):
@@ -325,11 +319,101 @@ class PhReadingsListView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class NpkReadingListView(APIView):
+    def get(self, request):
+        npkreading = NpkReading.objects.all()
+        
+        npk_value = request.query_params.get("npkreading")
+        if npk_value:
+            npkreading = npkreading.filter(npk_reading=npk_value)  
+        
+        serializer = NpkReadingSerializer(npkreading, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = NpkReadingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NpkReadingDetailView(APIView):
+    def get(self, request, id):
+        npkreading = get_object_or_404(NpkReading, id=id)
+        serializer = NpkReadingSerializer(npkreading)
+        return Response(serializer.data)
+    
+    def put(self, request, id):
+        npkreading = get_object_or_404(NpkReading, id=id)
+        serializer = NpkReadingSerializer(npkreading, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, id):
+        npkreading = get_object_or_404(NpkReading, id=id)
+        npkreading.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RecommendationsListView(APIView):
+    def get(self, request):
+        recommendations = Recommendation.objects.all()
+        serializer = RecommendationsSerializer(recommendations, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = RecommendationsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RecommendationsDetailView(APIView):
+    def get(self, request, id):
+        recommendation = get_object_or_404(Recommendation, id=id)
+        serializer = RecommendationsSerializer(recommendation)
+        return Response(serializer.data)
+    
+    def put(self, request, id):
+        recommendation = get_object_or_404(Recommendation, id=id)
+        serializer = RecommendationsSerializer(recommendation, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, id):
+        recommendation = get_object_or_404(Recommendation, id=id)
+        recommendation.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RecommendationListView(APIView):
+    def get(self, request):
+        recommendation= Recommendation.objects.all()
+        serializer = RecommendationSerializer(recommendation, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = RecommendationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class RecommendationDetailView(APIView):
+    def get(self, request, recommendation_id):
+        recommendation = get_object_or_404(Recommendation, id=recommendation_id)
+        serializer = RecommendationSerializer(recommendation)
+        return Response(serializer.data)
 
-
-
+    def post(self, request):
+        serializer = RecommendationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
         
