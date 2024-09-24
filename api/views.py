@@ -28,6 +28,11 @@ from django.shortcuts import get_object_or_404
 from recommendation.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
+from npkreadings.models import NpkReading
+from .serializers import NpkReadingSerializer
+from recommendation.models import Recommendation
+from .serializers import RecommendationSerializer
+
 from .serializers import *
 import logging
 import random
@@ -51,11 +56,6 @@ class FarmerListView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-from npkreadings.models import NpkReading
-from .serializers import NpkReadingSerializer
-from recommendation.models import Recommendation
-from .serializers import RecommendationSerializer
 
 class SensorreadingsListView(APIView):
     def get(self, request):
