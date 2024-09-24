@@ -3,14 +3,13 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .utils import send_sms  
-from farmer.models import Farmer
 import logging
 import pytz
 
 logger = logging.getLogger(__name__)
 
 class SensorData(models.Model):
-    farmer_id = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    farmer_id = models.ForeignKey('farmer.Farmer', on_delete=models.CASCADE)
     ph_reading = models.FloatField()
     moisture_reading = models.FloatField()
     nutrients = models.IntegerField()

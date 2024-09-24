@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Sensorreadings(models.Model):
     sensor_id = models.IntegerField()
     moisture_readings = models.IntegerField()

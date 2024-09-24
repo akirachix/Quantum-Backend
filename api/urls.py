@@ -17,8 +17,6 @@ from .views import InactiveSensorsListView, PhReadingsListView
 from .views import NpkReadingListView,NpkReadingDetailView
 from .views import RecommendationDetailView
 from .views import RecommendationListView
-from .views import RecommendationsDetailView
-from .views import RecommendationsListView
 
 urlpatterns = [
     path('sensorreadings/',SensorreadingsListView.as_view(),name='sensorreadings_list_view'),
@@ -36,8 +34,6 @@ urlpatterns = [
     path('farmers/', FarmerListView.as_view(), name='farmer-list'),
     path("npkreading/", NpkReadingListView.as_view(), name="npkreading_list_view"),
     path("npkreading/<int:id>/",NpkReadingDetailView.as_view(),name="npkreading_detail_view"),
-    path("recommendations/<int:id>/",RecommendationsDetailView.as_view(),name="recommendations_detail_view"),
-    path("recommendations/", RecommendationsListView.as_view(), name="recommendations_list_view"),
     path("recommendation/", RecommendationListView.as_view(), name="recommendation_list_view"),
     path('recommendation/', RecommendationDetailView.as_view(), name='recommendation_detail_view'),
 ]
