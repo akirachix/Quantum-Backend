@@ -5,6 +5,14 @@ from users.models import User
 from recommendation.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
+from farmer.models import Farmer
+
+
+class FarmerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Farmer
+        fields="__all__"
+
 from npkreadings.models import NpkReading
 from recommendations.models import Recommendations
 
@@ -31,14 +39,13 @@ class UsersSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password')
-
         user = User(**validated_data)
         user.set_password(password)  
         user.save()
         return user
+    
 
-class UsersDetailSerializer(serializers.ModelSerializer):# class RoleSerializer(serializers.Serializer):
-#     user_id = serializers.IntegerField()
+class UsersDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'firstname', 'lastname', 'email', 'password']
@@ -49,20 +56,11 @@ class UsersDetailSerializer(serializers.ModelSerializer):# class RoleSerializer(
 
 
 class LoginSerializer(serializers.Serializer):   
-
     class Meta:
         model = User
         fields = ('username', 'password')
 
 
-
-class UsersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'firstname', 'lastname', 'email', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True},
-        }
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -71,14 +69,6 @@ class UsersSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-class UsersDetailSerializer(serializers.ModelSerializer):# class RoleSerializer(serializers.Serializer):
-#     user_id = serializers.IntegerField()
-    class Meta:
-        model = User
-        fields = ['id', 'firstname', 'lastname', 'email', 'password']
-        extra_kwargs = {
-            'password': {'read_only': True},
-        }
 
 class LoginSerializer(serializers.Serializer):   
     class Meta:
@@ -91,29 +81,30 @@ class MoisturereadingsSerializer(serializers.ModelSerializer):
     class Meta:
         model= Moisturereadings
         fields="__all__"
-        
+
+
 class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = '__all__'
+
 
 class PhReadingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhReading
         fields = '__all__'
 
+
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         fields = '__all__'
+
         
-    
 class NpkReadingSerializer(serializers.ModelSerializer):
     class Meta:
         model=NpkReading
         fields="__all__"
-
-
 
 
 class RecommendationsSerializer(serializers.ModelSerializer):

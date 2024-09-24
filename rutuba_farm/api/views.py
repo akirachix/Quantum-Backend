@@ -1,9 +1,10 @@
-from django.shortcuts import render
-# Create your views here.
-from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import APIView, api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from api.serializers import FarmerSerializer
+from farmer.models import Farmer
+from sendsms.utils import send_sms
 from sensorreadings.models import Sensorreadings
 from .serializers import SensorreadingsSerializer
 from moisturereadings.models import Moisturereadings
@@ -23,19 +24,40 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from recommendation.models import Recommendation
 from django.shortcuts import get_object_or_404
 from recommendations.models import Recommendations
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from .serializers import RecommendationsSerializer, PhReadingSerializer, SensorSerializer
 import logging
+import random
+
+
+class FarmerListView(APIView):
+  
+    def get(self, request):
+        farmers = Farmer.objects.all()
+        farmers_name = request.query_params.get("farmers_name")
+        if farmers_name:
+            farmers = farmers.filter(farmer_name=farmers_name)
+        serializer = FarmerSerializer(farmers, many=True)
+        return Response(serializer.data)
+
+
+    def post(self, request):
+        serializer = FarmerSerializer(data=request.data)
+        if serializer.is_valid():
+            farmer = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 from npkreadings.models import NpkReading
 from .serializers import NpkReadingSerializer
 from recommendation.models import Recommendation
 from .serializers import RecommendationSerializer
 
-# Create your views here.
 class SensorreadingsListView(APIView):
     def get(self, request):
         sensor_readings = Sensorreadings.objects.all()
@@ -49,9 +71,7 @@ class SensorreadingsListView(APIView):
 
 
 
-
 logger = logging.getLogger(__name__) 
-
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -97,7 +117,6 @@ class LoginView(APIView):
 
 
 class UsersListView(APIView):
-    
     def get(self, request):
         users = User.objects.all() 
         name = request.query_params.get("name")
@@ -113,6 +132,26 @@ class UsersListView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class FarmerDetailView(APIView):
+    def get(self, request, id):
+        farmer = get_object_or_404(Farmer, id=id)
+        serializer = FarmerSerializer(farmer)
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        farmer = get_object_or_404(Farmer, id=id)
+        serializer = FarmerSerializer(farmer, data=request.data)
+    
+    def post(self, request):
+        serializer = FarmerSerializer(data=request.data)
+        if serializer.is_valid():
+            farmer = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        
+
 class UsersDetailView(APIView):
     def get(self, request, id):
         user = get_object_or_404(User, id=id)
@@ -126,6 +165,27 @@ class UsersDetailView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id):
+        farmer = get_object_or_404(Farmer, id=id)
+        farmer.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+
+@api_view(['GET'])
+def farmer_detail(request, farmer_id):
+  
+    try:
+        farmer = get_object_or_404(Farmer, id=farmer_id)  
+        
+        serializer = FarmerSerializer(farmer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        print(f"An error occurred: {str(e)}") 
+        return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     def delete(self, request, id):
         sensor_reading = get_object_or_404(Sensorreadings, id=id)
         sensor_reading.delete()
@@ -189,7 +249,7 @@ class InactiveSensorsListView(APIView):
 
     def post(self, request):
         data = request.data
-        data['is_active'] = False  # Ensure sensor is created as inactive
+        data['is_active'] = False  
         serializer = SensorSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
