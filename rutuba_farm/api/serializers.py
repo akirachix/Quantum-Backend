@@ -82,7 +82,7 @@ class MoisturereadingsSerializer(serializers.ModelSerializer):
         model= Moisturereadings
         fields="__all__"
 
-        
+
 class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation

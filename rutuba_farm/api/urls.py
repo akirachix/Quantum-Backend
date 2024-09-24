@@ -1,7 +1,7 @@
 from django.urls import path
 from .import views 
 from .views import FarmerListView
-from .views import RecommendationDetailedView, SensorreadingsListView
+from .views import SensorreadingsListView
 from .views import  SensorreadingsListView
 from .views import SensorreadingsDetailView
 from .views import MoisturereadingsListView
@@ -12,13 +12,14 @@ from .views import generate_token
 from .views import UsersListView
 from .views import UsersDetailView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-from .views import RecommendationDetailedView, InactiveSensorsListView, PhReadingsListView
+from .views import InactiveSensorsListView, PhReadingsListView
 from .views import InactiveSensorsListView, PhReadingsListView
 from .views import NpkReadingListView,NpkReadingDetailView
 from .views import RecommendationDetailView
 from .views import RecommendationListView
 from .views import RecommendationsDetailView
 from .views import RecommendationsListView
+
 urlpatterns = [
     path('sensorreadings/',SensorreadingsListView.as_view(),name='sensorreadings_list_view'),
     path('sensorreadings/<int:id>/',SensorreadingsDetailView.as_view(),name='sensorreadings_list_view'),

@@ -25,7 +25,7 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from recommendations.models import Recommendation
+from recommendation.models import Recommendation
 from django.shortcuts import get_object_or_404
 from recommendations.models import Recommendations
 from phreadings.models import PhReading
