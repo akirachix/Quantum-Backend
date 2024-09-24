@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_inactive_sensors
+from .views import inactive_sensors
 
 urlpatterns = [
     path('',inactive_sensors),
