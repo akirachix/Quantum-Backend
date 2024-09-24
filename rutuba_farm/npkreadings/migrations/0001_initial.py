@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('recommendations', '0001_initial'),
+        ('recommendation', '0001_initial'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('farmer_id', models.IntegerField()),
                 ('sensor_id', models.IntegerField()),
                 ('npk_reading', models.IntegerField()),
-                ('recommendation_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='NpkReading', to='recommendations.recommendation')),
+                ('recommendation_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='NpkReading', to='recommendation.recommendation')),
             ],
         ),
     ]

@@ -6,7 +6,7 @@ from recommendation.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from npkreadings.models import NpkReading
-from recommendations.models import Recommendations
+# from recommendations.models import Recommendations
 
 
 class SensorreadingsSerializer(serializers.ModelSerializer):
@@ -116,7 +116,7 @@ class NpkReadingSerializer(serializers.ModelSerializer):
 
 
 
-class RecommendationsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recommendations
-        fields = "__all__"
+# class RecommendationsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Recommendations
+#         fields = "__all__"

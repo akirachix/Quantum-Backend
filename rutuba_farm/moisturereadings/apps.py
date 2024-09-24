@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
-class MoisturerecommendationsConfig(AppConfig):
+class MoisturerecommendationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'moisturereadings'

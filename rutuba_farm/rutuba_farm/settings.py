@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'phreadings',
     'inactivestatus',
-    'recommendations',
     'moisturereadings',
     'sensorreadings',
     'authentication',

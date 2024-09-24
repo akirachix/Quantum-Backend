@@ -1,4 +1,5 @@
 from django.db import models
+
 class Moisturereadings(models.Model):
     sensor_id = models.IntegerField()
     farmer_id = models.IntegerField()
