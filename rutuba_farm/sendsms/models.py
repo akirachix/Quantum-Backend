@@ -55,8 +55,6 @@ def send_sms_on_new_sensor_data(sender, instance, created, **kwargs):
 
 def generate_recommendation(sensor_data):
     recommendations = []
-
-
     if sensor_data.ph_reading < 4.5:
         recommendations.append("Add lime. Plant only tough crops.")
     elif 4.5 <= sensor_data.ph_reading < 5.5:

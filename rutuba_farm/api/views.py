@@ -181,46 +181,8 @@ class UsersDetailView(APIView):
         farmer = get_object_or_404(Farmer, id=id)
         farmer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
 
-# SMS Views
-
-@api_view(['POST'])
-def send_sms_view(request):
-    phone_number = request.data.get('phone_number')  
-    if not phone_number:
-        return Response({"error": "Phone number is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-    try:
-        farmer = get_object_or_404(Farmer,phone_number=phone_number)
-        message = f"Hello{farmer.farmers_name},your pH level is 4,moisture level is 40% and your soil has low nitrogen.Based on these results,here are your recommendations:Water your crops,add lime and apply nitrogenous fertilizer eg.Amonium Nitrate"
-        response = send_sms(phone_number, message) 
-
-        if response:
-            return Response({"status": "SMS sent successfully"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "Failed to send SMS"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")  
-        return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-@api_view(['POST'])
-def send_recommendation(request, farmer_id):
-   
-    try:
-        farmer = get_object_or_404(Farmer, id=farmer_id)  
-        message = f"Hello {farmer.farmers_name}, here are your recommendations: [YOUR_RECOMMENDATIONS_HERE]"
-
-        response = send_sms(farmer.phone_number, message)  
-
-        if response:
-            return Response({'status': 'Recommendation sent successfully!'}, status=status.HTTP_200_OK)
-        else:
-            return Response({'error': 'Failed to send recommendation.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")  
-        return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 def farmer_detail(request, farmer_id):
