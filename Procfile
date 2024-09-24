@@ -1,0 +1,1 @@
+web: gunicorn rutuba_farm.wsgi --log-file -
