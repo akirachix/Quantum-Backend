@@ -59,15 +59,13 @@ INSTALLED_APPS = [
     'sendsms',
     'phreadings',
     'inactivestatus',
-    'recommendations',
     'moisturereadings',
     'sensorreadings',
     'authentication',
     'users',
     'recommendation',
     'npkreadings',
-    "rest_framework_simplejwt",
-    "corsheaders"
+
 ]
 
 
@@ -107,28 +105,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rutuba_farm.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
-DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
-    )
-}
-# Fallback for local development and test environments
-if not os.getenv('DATABASE_URL'):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+
+# DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL')
+#     )
+# }
+# if not os.getenv('DATABASE_URL'):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+    
+    
+
 
 
 

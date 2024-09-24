@@ -6,15 +6,13 @@ from recommendation.models import Recommendation
 from phreadings.models import PhReading
 from inactivestatus.models import Sensor
 from farmer.models import Farmer
+from npkreadings.models import NpkReading
 
 
 class FarmerSerializer(serializers.ModelSerializer):
     class Meta:
         model= Farmer
         fields="__all__"
-
-from npkreadings.models import NpkReading
-from recommendations.models import Recommendations
 
 
 class SensorreadingsSerializer(serializers.ModelSerializer):
@@ -107,7 +105,3 @@ class NpkReadingSerializer(serializers.ModelSerializer):
         fields="__all__"
 
 
-class RecommendationsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recommendations
-        fields = "__all__"
