@@ -159,9 +159,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-"""SMSLEOPARD credentials"""
-SMS_LEOPARD_API_URL = 'https://api.smsleopard.com/v1/sms/send'
-SMS_LEOPARD_ACCESS_TOKEN = 'alA4aXRHVHc2OG9QUGF2a0dxYVc6M01pSldhYUhDMlF2eVdnNHdYZnpNUjMzQzZZeFNNTVUyQmN4aEhuYg=='
 
 TEMPLATES = [
     {
