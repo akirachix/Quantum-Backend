@@ -11,4 +11,4 @@ class Farmer(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.farmers_name} {self.sensor_id}"
+        return f"{self.farmer_id}"

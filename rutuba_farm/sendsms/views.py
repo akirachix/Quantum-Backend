@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import SensorData
 from .serializers import SensorDataSerializer
+from django.views import View
+from django.http import JsonResponse
+from sendsms.models import SensorData
 
 class SensorDataCreateView(APIView):
     def post(self, request, format=None):
@@ -32,11 +35,6 @@ class SensorDataListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-from django.views import View
-from django.http import JsonResponse
-from sendsms.models import SensorData
 
 class SensorDataDetailView(View):
     def get(self, request, pk):

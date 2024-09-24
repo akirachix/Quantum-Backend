@@ -30,13 +30,14 @@ def validate_phone_number(phone_number):
 def send_sms_to_farmer(sensor_data):
     eat = pytz.timezone('Africa/Nairobi')
     formatted_timestamp = sensor_data.created_at.astimezone(eat).strftime('%Y-%m-%d %H:%M:%S')
-
+ 
     message = (
-        f"New sensor data recorded:\n"
+        f"Hello {sensor_data.farmer_id.farmers_name} \n"
+        f"This is RutubaFarm. The new sensor data recorded on:\n"
+        f"{formatted_timestamp} \n "
         f"pH Level: {sensor_data.ph_reading}\n"
         f"Moisture Level: {sensor_data.moisture_reading}\n"
         f"Nutrients: {sensor_data.nutrients}\n"
-        f"Timestamp: {formatted_timestamp} EAT\n"
         f"Recommendations: {generate_recommendation(sensor_data)}"
     )
 

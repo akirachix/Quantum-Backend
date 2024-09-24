@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import FarmerSerializer
 from farmer.models import Farmer
-# from sendsms.models import Sendsms
 from sendsms.utils import send_sms
 from sensorreadings.models import Sensorreadings
 from .serializers import SensorreadingsSerializer
@@ -35,9 +34,6 @@ import logging
 import random
 
 
-
-# Farmer Views
-
 class FarmerListView(APIView):
   
     def get(self, request):
@@ -48,8 +44,6 @@ class FarmerListView(APIView):
         serializer = FarmerSerializer(farmers, many=True)
         return Response(serializer.data)
 
-    # def post(self, request):
-    #     serializer = FarmerSerializer(data=request.data)
 
     def post(self, request):
         serializer = FarmerSerializer(data=request.data)
@@ -64,7 +58,6 @@ from .serializers import NpkReadingSerializer
 from recommendation.models import Recommendation
 from .serializers import RecommendationSerializer
 
-# Create your views here.
 class SensorreadingsListView(APIView):
     def get(self, request):
         sensor_readings = Sensorreadings.objects.all()
@@ -78,9 +71,7 @@ class SensorreadingsListView(APIView):
 
 
 
-
 logger = logging.getLogger(__name__) 
-
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -126,7 +117,6 @@ class LoginView(APIView):
 
 
 class UsersListView(APIView):
-    
     def get(self, request):
         users = User.objects.all() 
         name = request.query_params.get("name")
@@ -144,7 +134,6 @@ class UsersListView(APIView):
 
 
 class FarmerDetailView(APIView):
-
     def get(self, request, id):
         farmer = get_object_or_404(Farmer, id=id)
         serializer = FarmerSerializer(farmer)
@@ -260,7 +249,7 @@ class InactiveSensorsListView(APIView):
 
     def post(self, request):
         data = request.data
-        data['is_active'] = False  # Ensure sensor is created as inactive
+        data['is_active'] = False  
         serializer = SensorSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

@@ -46,8 +46,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,7 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SMS_LEOPARD_API_URL = 'https://api.smsleopard.com/v1/sms/send'
 SMS_LEOPARD_ACCESS_TOKEN = 'alA4aXRHVHc2OG9QUGF2a0dxYVc6M01pSldhYUhDMlF2eVdnNHdYZnpNUjMzQzZZeFNNTVUyQmN4aEhuYg=='
 
-# SMS_LEOPARD_ACCESS_TOKEN='jP8itGTw68oPPavkGqaW'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

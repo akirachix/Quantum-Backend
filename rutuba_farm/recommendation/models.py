@@ -16,7 +16,6 @@ class Recommendation(models.Model):
         return self.recommendation_text
 
 
-
 @receiver(post_save, sender=SensorData)
 def create_recommendation_for_sensor_data(sender, instance, created, **kwargs):
     if created:

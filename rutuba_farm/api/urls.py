@@ -32,7 +32,6 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register_view'),
     path('inactive/', InactiveSensorsListView.as_view(), name='inactive_sensors'),
     path('ph-readings/', PhReadingsListView.as_view(), name='list_ph_readings'),
-    # path('send_recommendation/<int:farmer_id>/', views.send_recommendation, name='send_recommendation'),
     path('farmer/<int:farmer_id>/', views.farmer_detail, name='farmer_detail'),
     path('farmers/', FarmerListView.as_view(), name='farmer-list'),
     path("npkreading/", NpkReadingListView.as_view(), name="npkreading_list_view"),
