@@ -15,8 +15,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import InactiveSensorsListView, PhReadingsListView
 from .views import InactiveSensorsListView, PhReadingsListView
 from .views import NpkReadingListView,NpkReadingDetailView
-from .views import RecommendationDetailView
-from .views import RecommendationListView
+from .views import RecommendationDetailView, RecommendationListView
+from .views import FarmerDetailView
 
 urlpatterns = [
     path('sensorreadings/',SensorreadingsListView.as_view(),name='sensorreadings_list_view'),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register_view'),
     path('inactive/', InactiveSensorsListView.as_view(), name='inactive_sensors'),
     path('ph-readings/', PhReadingsListView.as_view(), name='list_ph_readings'),
-    path('farmer/<int:farmer_id>/', views.farmer_detail, name='farmer_detail'),
+    path('farmers/<int:farmer_id>/', FarmerDetailView.as_view(), name='farmer_detail'),
     path('farmers/', FarmerListView.as_view(), name='farmer-list'),
     path("npkreading/", NpkReadingListView.as_view(), name="npkreading_list_view"),
     path("npkreading/<int:id>/",NpkReadingDetailView.as_view(),name="npkreading_detail_view"),

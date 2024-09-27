@@ -47,6 +47,7 @@ class FarmerListView(APIView):
             farmers = farmers.filter(farmer_name=farmers_name)
         serializer = FarmerSerializer(farmers, many=True)
         return Response(serializer.data)
+    
 
 
     def post(self, request):
@@ -137,6 +138,8 @@ class FarmerDetailView(APIView):
         farmer = get_object_or_404(Farmer, id=id)
         serializer = FarmerSerializer(farmer)
         return Response(serializer.data)
+    
+    
 
     def put(self, request, id):
         farmer = get_object_or_404(Farmer, id=id)
